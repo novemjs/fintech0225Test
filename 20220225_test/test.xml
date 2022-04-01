@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="WebMarket" default="jarTest" basedir=".">
+	<property name="targetDir" value="c:\my_ant"/>
+	<property name="jarTargetDir" value="c:\fintechjar"/>
+	<property name="sourceDir" value="${basedir}\src\main\java\AntTest"/>
+	
+	<target name="jarTest">
+		<!-- mkdir : 폴더 생성,class파일이 있는 위치 -->
+		<mkdir dir="${targetDir}"/>
+		<!-- jar 파일이 있는 폴더 생성 -->
+		<mkdir dir="${jarTargetDir}"/>
+		<!-- 자바 클래스 파일을 c:\my_ant 에 복사 -->
+		<copy todir="${targetDir}">
+			<fileset dir="${sourceDir}"/>
+		</copy>
+		<!-- 
+			복사한 test1.java,test2,java를 
+			c:\my_ant에 컴파일 한다.
+		-->
+		<javac srcdir="${targetDir}" destdir="${targetDir}"/>
+		
+		<!-- 
+			 c:\my_ant 폴더에 있는 Test1.java,Test2.java 삭제 
+		-->
+		<delete>
+			<fileset dir="${targetDir}" includes="**/*.java"/>
+		</delete>
+		<!-- 
+			생성된 class파일들을 가지고 jar 파일 생성
+			basedir:class파일이 있는 폴더
+		 -->
+		<jar destfile="${jarTargetDir}/test0225.jar" basedir="${targetDir}"/>
+		
+		<!-- c:\my_ant 폴더에 있는 모든 class 파일 삭제 -->
+		<delete>
+			<fileset dir="${targetDir}" includes="**/*.class"/>
+		</delete>
+		
+		<echo message=""/>
+	</target>
+</project>
+
+
+
+
+
